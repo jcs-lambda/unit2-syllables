@@ -16,17 +16,17 @@ column1 = dbc.Col(
         dcc.Markdown(
             """
         
-            ## Your Value Proposition
+            ## Trouble automating your haikus?
 
-            Emphasize how the app will benefit users. Don't emphasize the underlying technology.
+            Does your recurrent neural network haiku generator require you to label all your training data with syllable counts?
 
-            ✅ RUN is a running app that adapts to your fitness levels and designs personalized workouts to help you improve your running.
+            Why waste your precious time counting word chunks when you can leverage the power of machine learing to count syllables for you?
 
-            ❌ RUN is the only intelligent running app that uses sophisticated deep neural net machine learning to make your run smarter because we believe in ML driven workouts.
+            **Bonus Feature:** Only about 80% accurate, so your AI can push the boundaries of haiku as an art form!
 
             """
         ),
-        dcc.Link(dbc.Button('Your Call To Action', color='primary'), href='/predictions')
+        dcc.Link(dbc.Button('Try It Out', color='primary'), href='/predictions')
     ],
     md=4,
 )
