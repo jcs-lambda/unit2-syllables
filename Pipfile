@@ -12,8 +12,9 @@ gunicorn = "*"
 plotly = "*"
 pandas = "*"
 joblib = "==0.14.1"
-scikit-learn = "==0.21.3"
 numpy = "*"
+sklearn = "*"
+scikit-learn = "*"
 
 [requires]
 python_version = "3"
