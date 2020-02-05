@@ -18,19 +18,16 @@ column1 = dbc.Col(
         
             ## Predictions
 
-            Enter some text and press enter to have the model predict how many syllables each word contains.
+            Enter some text to have the model predict how many syllables each word contains.
 
-            This ignores any character that is not "a" - "z".
+            This ignores any character that is not in the English alphabet.
 
             """
         ),
         dcc.Textarea(
-        # dcc.Input(
             id = 'prediction_input',
             placeholder = 'Enter some text...',
-            # type = 'textarea',
             value = '',
-            # debounce = True,
             autoFocus = 'autoFocus',
             persistence = True,
             persistence_type = 'session',
@@ -74,18 +71,18 @@ def predict(text:str):
         return [{'word':'', 'syllables':0}], [{'name':'word', 'id':'word'}, {'name':'syllables', 'id':'syllables'}]
     data = {
         'length' : words.str.len(),
-        'num_vowels' : words.str.count('[aeiou]'),
-        'vowel_chunks' : words.str.count('[aeiou]+'),
-        'max_vowel_chunk_length' : words.str.split('[^aeiou]+').apply(lambda a_list : max([len(item) for item in a_list])),
-        'ends_with_e' : words.str.endswith('e'),
-        'h_as_vowel' : words.str.contains('[aeiou]h[^aeiouy]'),
-        'num_ys' : words.str.count('y'), 
-        'ends_with_y' : words.str.endswith('y'),
-        'y_as_consonant' : words.str.contains('[aeiou]y[aeiou]'),
-        'num_consonants' : words.str.count('[^aeiou]'), 
-        'consonant_chunks' : words.str.count('[^aeiou]+'),
-        'max_consonant_chunk_length' : words.str.split('[aeiou]+').apply(lambda a_list : max([len(item) for item in a_list])),
-        'num_doubled_consonants' : words.str.count('([^aeiou])\\1{1}[^$]')
+        'num_vowels' : words.str.lower().str.count('[aeiou]'),
+        'vowel_chunks' : words.str.lower().str.count('[aeiou]+'),
+        'max_vowel_chunk_length' : words.str.lower().str.split('[^aeiou]+').apply(lambda a_list : max([len(item) for item in a_list])),
+        'ends_with_e' : words.str.lower().str.endswith('[e]'),
+        'h_as_vowel' : words.str.lower().str.contains('[aeiou]h[^aeiouy]'),
+        'num_ys' : words.str.lower().str.count('y'), 
+        'ends_with_y' : words.str.lower().str.endswith('y'),
+        'y_as_consonant' : words.str.lower().str.contains('[aeiou]y[aeiou]'),
+        'num_consonants' : words.str.lower().str.count('[^aeiou]'), 
+        'consonant_chunks' : words.str.lower().str.count('[^aeiou]+'),
+        'max_consonant_chunk_length' : words.str.lower().str.split('[aeiou]+').apply(lambda a_list : max([len(item) for item in a_list])),
+        'num_doubled_consonants' : words.str.lower().str.count('([^aeiou])\\1{1}[^$]')
     }
     df = pd.DataFrame(data)
     y_pred = pipeline.predict(df)

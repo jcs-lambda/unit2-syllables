@@ -20,7 +20,7 @@ column1 = dbc.Col(
 
             Does your recurrent neural network haiku generator require you to label all your training data with syllable counts?
 
-            Why waste your precious time counting word chunks when you can leverage the power of machine learing to count syllables for you?
+            Why waste your precious time counting word chunks when you can leverage the power of machine learning to count syllables for you?
 
             **Bonus Feature:** Only about 80% accurate, so your AI can push the boundaries of haiku as an art form!
 

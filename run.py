@@ -12,7 +12,7 @@ from pages import index, predictions, insights, process
 # Navbar docs: https://dash-bootstrap-components.opensource.faculty.ai/l/components/navbar
 navbar = dbc.NavbarSimple(
     brand='Predicting Number of Syllables',
-    brand_href='/', 
+    brand_href='https://syllables.herokuapp.com/', 
     children=[
         dbc.NavItem(dcc.Link('Predictions', href='/predictions', className='nav-link')), 
         dbc.NavItem(dcc.Link('Insights', href='/insights', className='nav-link')), 
