@@ -17,6 +17,20 @@ column1 = dbc.Col(
         
             ## Insights
 
+            As I iterated through this project, I kept adding more features in an attempt to provide the model enough data
+            to catch some of the edge cases that I came across. I started with length, the number of vowels and consonants, 
+            features dealing with the letter 'y', and whether or not a word started or ended with a vowel. The model's most
+            significant jump in accuracy came when I added features dealing with sequences of vowels and consonants.
+            As you can see in the image below, my final model made most use of the 'chunk' features; and most of my later
+            feature engineering provided negligible impact on the model's decision process.
+
+            ![Final model's feature importances](assets/feature_importances.png)
+
+            This graph of the top of the shallow decision tree I used to establish a baseline score shows where it decided
+            to split, using the 'chunk' features in it's first few levels. You can click the image to view the next row as well.
+
+            [![Decision Tree Stump](assets/decision_tree_stump.png)](assets/decision_tree_stump_large.png 'Click for a larger view')
+
             I had difficulty quickly thinking of short words that had multiple syllables, but there are several common
             2 syllable words that are only 3 letters long, such as:
             - ago

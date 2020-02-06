@@ -37,9 +37,22 @@ column1 = dbc.Col(
             The final dataset I used for this model looked like the image below and is available as a CSV in
             [this project's github repo](https://github.com/jcs-lambda/unit2-syllables/assets/words.csv).
 
-            ![small sample of the dataset](assets/words_sample.png 'small sample of the dataset')
+            [![small sample of the dataset](assets/words_sample_cropped.png)](assets/words_sample.png 'Click for full image')
 
-            
+            I chose to use accuracy score to judge my model's efficacy. As I constructed it to be a multi-class
+            classification problem, I used a shallow decision tree for a baseline to compare against my model's
+            performance. Baseline accuracy was about 75%, with a ROC/AUC score of almost 82%.
+
+            As shown on the [front page](https://syllables.herokuapp.com/ 'Intro page'), linear models would have difficulty
+            predicting syllables based on word length alone. The features I engineered allowed a logistic regression model
+            to beat the baseline in accuracy, scoring about 79% accuracy. But, the logistic regression model had a
+            significantly worse ROC/AUC score of about 63%.
+
+            For the model in use on the [predictions page](/predictions 'Predictions'), I used a random forest classifier.
+            A random forest makes use of several shallow decision trees whose outputs are averaged together to build a
+            final model. The random forest model achieved an accuracy of 83.21% and a ROC/AUC score of 96.72% on the test set,
+            which I had held out at the begining and only used for this final set o predictions.
+
 
             """
         ),

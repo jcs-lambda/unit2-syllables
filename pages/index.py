@@ -16,13 +16,13 @@ column1 = dbc.Col(
         dcc.Markdown(
             """
         
-            ## Trouble automating your haikus?
+            ### Trouble automating your haikus?
 
             Does your recurrent neural network haiku generator require you to label all your training data with syllable counts?
 
-            Why not leverage the power of machine learning to automate that tedious task?
+            Why not leverage the power of machine learning to automate that onerous task?
 
-            **Bonus Feature:** Only about 80% accurate, so your AI can push the boundaries of haiku as an art form!
+            **Bonus Feature:** Only 83% accurate predictions, so your AI can push the boundaries of haiku as an art form!
 
             """
         ),
@@ -31,12 +31,35 @@ column1 = dbc.Col(
     md=4,
 )
 
-gapminder = px.data.gapminder()
-fig = px.scatter(gapminder.query("year==2007"), x="gdpPercap", y="lifeExp", size="pop", color="continent",
-           hover_name="country", log_x=True, size_max=60)
+# gapminder = px.data.gapminder()
+# fig = px.scatter(gapminder.query("year==2007"), x="gdpPercap", y="lifeExp", size="pop", color="continent",
+#            hover_name="country", log_x=True, size_max=60)
+
+# import pandas as pd
+# df = pd.read_csv('assets/words_min.csv')
+# fig = px.scatter(df, x='length', y='syllables', trendline='ols', 
+#     range_y=[0,10], range_x=[3, 20], opacity=.2, 
+#     title='Word Length by Number of Syllables',
+#     size_max=80,
+# )
 
 column2 = dbc.Col(
     [
+        dcc.Markdown(
+            """
+
+            ##### Why I used a tree-based model.
+
+            As you can see in the plot below, a linear model would not have provided accuracte predictions.
+
+            [![Scatter plot of word length by number of syllables](assets/linear_scatter_small.png)](assets/linear_scatter.png 'Click for full size image')
+
+            Check out the [Process page](/process 'Process') to see some details about the dataset and model I used.
+
+            On the [Insights page](/insights 'Insights') I share some of the things I learned while working on this project.
+
+            """
+        ),
         # dcc.Graph(figure=fig),
     ]
 )
