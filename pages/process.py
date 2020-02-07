@@ -62,7 +62,8 @@ column1 = dbc.Col(
             that probably outperform this model. Most of them are rule based and can handle edge cases much better than a
             machine learning model - or at least one I can currently build.
 
-            You can view my work notebook on [github](https://github.com/jcs-lambda/unit2-syllables/blob/master/notebooks/syllables.ipynb).
+            You can view my work notebook on [github](https://github.com/jcs-lambda/unit2-syllables/blob/master/notebooks/syllables.ipynb)
+            or [open it in Google Colab](https://colab.research.google.com/github/jcs-lambda/unit2-syllables/blob/master/notebooks/syllables.ipynb 'Open in Colab').
 
             """
         ),

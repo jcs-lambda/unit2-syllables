@@ -20,10 +20,6 @@ column1 = dbc.Col(
 
             Enter text to have the model predict how many syllables each word contains.
 
-            This ignores any character that is not in the English alphabet.
-
-            If the actual number of syllables is unknown, it will be blacked out.
-
             """
         ),
         dcc.Textarea(
@@ -35,6 +31,15 @@ column1 = dbc.Col(
             persistence_type = 'session',
             cols = 25,
             rows = 7
+        ),
+        dcc.Markdown(
+            """
+
+            A red cell indicates an incorrect prediction.
+
+            A blacked-out cell means the actual number of syllables is unknown.
+
+            """
         )
     ],
     md=4,
