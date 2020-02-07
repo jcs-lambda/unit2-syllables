@@ -40,7 +40,7 @@ column1 = dbc.Col(
             [![small sample of the dataset](assets/words_sample_cropped.png)](assets/words_sample.png 'Click for full image')
 
             I chose to use accuracy score to judge my model's efficacy. As I constructed it to be a multi-class
-            classification problem, I used a shallow [decision tree](https://scikit-learn.org/stable/modules/tree.html 'sklearn Trees documentation)
+            classification problem, I used a shallow [decision tree](https://scikit-learn.org/stable/modules/tree.html 'sklearn Trees documentation')
              for a baseline to compare against my model's performance. Baseline accuracy was about 75%, with a 
             [ROC/AUC](https://www.dataschool.io/roc-curves-and-auc-explained/ 'ROC/AUC measures how well a classifier ranks predicted probabilities')
             score of almost 82%.
@@ -55,7 +55,7 @@ column1 = dbc.Col(
             [random forest](https://scikit-learn.org/stable/modules/ensemble.html#forests-of-randomized-trees 'sklearn forest documentation') classifier.
             A random forest makes use of multiple randomized shallow decision trees whose predictions are averaged together to form a
             final 'ensemble' prediction. The random forest model achieved an accuracy of 83.21% and a ROC/AUC score of 96.72% on the test set,
-            which I had held out at the beginning and only used for this final set o predictions.
+            which I had held out at the beginning and only used for this final set of predictions.
 
             After all is said and done, this particular model is not very useful for any real world application.
             There are [many resources available](https://duckduckgo.com/?q=programatically+counting+syllables 'web search')
