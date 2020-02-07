@@ -17,10 +17,10 @@ column1 = dbc.Col(
         
             ## Process
 
-            I started with [dictinary.com's](https://dictionary.com) offline mobile app database. It contains a lot information
-            that I ended up not using for this project. I used all the entries at least three charachters in length that
-            did not contain any spaces or puncuation. One other field that I used contained the words divided into syllables.
-            I removed words with more than 10 syllables from my dataset, because words that large were only 6 of them. 
+            I started with [dictionary.com's](https://dictionary.com) offline mobile app database. It contains a lot information
+            that I ended up not using for this project. I used all the entries at least three characters in length that
+            did not contain any spaces or punctuation. One other field that I used contained the words divided into syllables.
+            I removed words with more than 10 syllables from my dataset, because words were only 6 of them. 
             I had to manually fix a few incorrect entries that I came across while exploring 
             the data. Eventually, the dataset contained about 89,000 words.
 
@@ -35,24 +35,35 @@ column1 = dbc.Col(
             I created number of features dealing with vowel and consonant counts, vowel and consonant sequences,
             doubled consonants ('tt', 'gg', 'ss', etc.), and features specific to certain letters ('e', 'y', and 'h').
             The final dataset I used for this model looked like the image below and is available as a CSV in
-            [this project's github repo](https://github.com/jcs-lambda/unit2-syllables/assets/words.csv).
+            [this project's github repo](https://github.com/jcs-lambda/unit2-syllables/blob/master/assets/words.csv).
 
             [![small sample of the dataset](assets/words_sample_cropped.png)](assets/words_sample.png 'Click for full image')
 
             I chose to use accuracy score to judge my model's efficacy. As I constructed it to be a multi-class
-            classification problem, I used a shallow decision tree for a baseline to compare against my model's
-            performance. Baseline accuracy was about 75%, with a ROC/AUC score of almost 82%.
+            classification problem, I used a shallow [decision tree](https://scikit-learn.org/stable/modules/tree.html 'sklearn Trees documentation)
+             for a baseline to compare against my model's performance. Baseline accuracy was about 75%, with a 
+            [ROC/AUC](https://www.dataschool.io/roc-curves-and-auc-explained/ 'ROC/AUC measures how well a classifier ranks predicted probabilities')
+            score of almost 82%.
 
             As shown on the [front page](https://syllables.herokuapp.com/ 'Intro page'), linear models would have difficulty
-            predicting syllables based on word length alone. The features I engineered allowed a logistic regression model
-            to beat the baseline in accuracy, scoring about 79% accuracy. But, the logistic regression model had a
+            predicting syllables based on word length alone. The features I engineered allowed a 
+            [logistic regression](https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression 'sklearn Logistic Regression documentation')
+            model to beat the baseline in accuracy, scoring about 79% accuracy. But, the logistic regression model had a
             significantly worse ROC/AUC score of about 63%.
 
-            For the model in use on the [predictions page](/predictions 'Predictions'), I used a random forest classifier.
-            A random forest makes use of several shallow decision trees whose outputs are averaged together to build a
-            final model. The random forest model achieved an accuracy of 83.21% and a ROC/AUC score of 96.72% on the test set,
-            which I had held out at the begining and only used for this final set o predictions.
+            For the model in use on the [predictions page](/predictions 'Predictions'), I used a 
+            [random forest](https://scikit-learn.org/stable/modules/ensemble.html#forests-of-randomized-trees 'sklearn forest documentation') classifier.
+            A random forest makes use of multiple randomized shallow decision trees whose predictions are averaged together to form a
+            final 'ensemble' prediction. The random forest model achieved an accuracy of 83.21% and a ROC/AUC score of 96.72% on the test set,
+            which I had held out at the beginning and only used for this final set o predictions.
 
+            After all is said and done, this particular model is not very useful for any real world application.
+            There are [many resources available](https://duckduckgo.com/?q=programatically+counting+syllables 'web search')
+            that probably outperform this model. Most of them are rule based and can handle edge cases much better than a
+            machine learning model - at least one that I can build at this point.
+
+            You can view the notebook where all this work was done in [this project's github repository](https://github.com/jcs-lambda/unit2-syllables/blob/master/notebooks/syllables.ipynb),
+            or even open it in Colab and play around with it yourself.
 
             """
         ),
