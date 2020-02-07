@@ -48,15 +48,15 @@ column2 = dbc.Col(
         dcc.Markdown(
             """
 
-            ##### Why word length is not a good predictor of number of syllables.
+            ##### Why word length is not a good predictor of number of syllables
 
-            As you can see in the plot below, it would be difficult to make accuracte predictions only using the length of the word.
-            I engineered several features that enabled even a linear model to do a decent job classifying the number of a word's syllables.
-            I ended up using a tree based model for use in the [predictions page](/predictions).
+            As you can see in the plot below, it would be difficult to make accuracte predictions only using the word-length.
+            I engineered several features that enable even a linear model to do a decent job classifying the number of syllables in a word.
+            I ended up choosing a tree based model for use in the [predictions page](/predictions).
 
             [![Scatter plot of word length by number of syllables](assets/linear_scatter_small.png)](assets/linear_scatter.png 'Click for full size image')
 
-            Check out the [Process page](/process 'Process') to see some details about the dataset and model I used.
+            Check out the [Process page](/process 'Process') to see details about the dataset and model I used.
 
             On the [Insights page](/insights 'Insights') I share some of the things I learned while working on this project.
 

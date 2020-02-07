@@ -18,9 +18,11 @@ column1 = dbc.Col(
         
             ## Predictions
 
-            Enter some text to have the model predict how many syllables each word contains.
+            Enter text to have the model predict how many syllables each word contains.
 
             This ignores any character that is not in the English alphabet.
+
+            If the actual number of syllables is unknown, it will be blacked out.
 
             """
         ),
@@ -42,7 +44,25 @@ column2 = dbc.Col(
     [
         # html.H2('Predicted syllables', className='mb-5'),
         # html.Div(id='prediction-content', className='lead')
-        html.Div(dash_table.DataTable(id='prediction-content'))
+        html.Div(dash_table.DataTable(
+            id='prediction-content',
+            style_data_conditional = [
+                {
+                    'if' : {
+                        'column_id' : 'predicted syllables',
+                        'filter_query' : '{predicted syllables} ne {actual syllables} && {actual syllables} ne 0'
+                    },
+                    'backgroundColor' : '#ffcccc'
+                },
+                {
+                    'if' :{
+                        'column_id' : 'actual syllables',
+                        'filter_query' : '{actual syllables} eq 0 && {predicted syllables} ne 0'
+                    },
+                    'backgroundColor' : '#000000'
+                }
+            ]
+        ))
     ]
 )
 
@@ -52,6 +72,21 @@ from joblib import load
 import pandas as pd
 
 pipeline = load('assets/pipeline.joblib')
+df_words_min = pd.read_csv('assets/words_min.csv')
+df_words_min['entry'] = df_words_min['entry'].str.lower()
+df_words_min.drop_duplicates(subset='entry', keep='first', inplace=False)
+
+def get_actual(word):
+    if len(word) == 0:
+        return 0
+    elif len(word) < 3:
+        return 1
+    else:
+        syllables = df_words_min[df_words_min['entry'] == word]['syllables'].values
+        if len(syllables) == 0:
+            return 0
+        else:
+            return syllables[0]
 
 @app.callback(
     [Output('prediction-content', 'data'), Output('prediction-content', 'columns')],
@@ -60,7 +95,7 @@ pipeline = load('assets/pipeline.joblib')
 
 def predict(text:str):
     if text is None or text == '':
-        return [{'word':'', 'syllables':0}], [{'name':'word', 'id':'word'}, {'name':'syllables', 'id':'syllables'}]
+        return [{'word':'', 'predicted syllables':0, 'actual syllables':0}], [{'name':'word', 'id':'word'}, {'name':'predicted syllables', 'id':'predicted syllables'}, {'name':'actual syllables', 'id':'actual syllables'}]
     text = pd.Series(text)
     # replace anything that is not an english alphabetic character or white space with nothing
     # replace any white space sequences with the first white space character
@@ -68,7 +103,7 @@ def predict(text:str):
     words = pd.Series(text.str.replace('[^a-zA-Z\s]', '').str.replace('(\s)+', '\\1').str.split('\s')[0])
     words = words[words.str.len() > 0]
     if len(words) == 0 or words.str.len().sum() == 0:
-        return [{'word':'', 'syllables':0}], [{'name':'word', 'id':'word'}, {'name':'syllables', 'id':'syllables'}]
+        return [{'word':'', 'predicted syllables':0, 'actual syllables':0}], [{'name':'word', 'id':'word'}, {'name':'predicted syllables', 'id':'predicted syllables'}, {'name':'actual syllables', 'id':'actual syllables'}]
     data = {
         'length' : words.str.len(),
         'num_vowels' : words.str.lower().str.count('[aeiou]'),
@@ -88,7 +123,8 @@ def predict(text:str):
     y_pred = pipeline.predict(df)
     df_predictions = pd.DataFrame({
         'word' : words,
-        'syllables' : y_pred
+        'predicted syllables' : y_pred,
+        'actual syllables' : [get_actual(word) for word in words.str.lower()]
     })
     columns = [{'name':i, 'id':i} for i in df_predictions.columns]
     data = df_predictions.to_dict('records')
